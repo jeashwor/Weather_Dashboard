@@ -1,0 +1,31 @@
+header {
+  text-align: center;
+  padding: 20px;
+  color: white;
+}
+
+i {
+  margin-top: 8px;
+  }
+
+.saveBtn {
+  background-color: #457dd1;
+  color: white;
+  padding: 0px;
+  text-align: center;
+
+}
+
+.saveBtn i:hover {
+  font-size: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+#search {
+  float: left;
+  width: 400px;
+}
+
+#cityToSearch {
+    margin-left: 15px;
+}
