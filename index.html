@@ -22,17 +22,23 @@
         <div class="row">
             <h5 class="col">Search for a City:</h5>
         </div>
-        <form class="row">
-            <input class="col-6" id="cityToSearch"></input>
+        <form class="row input-group">
+            <input type="text" class="col-6 form-control" id="cityToSearch" placeholder="City" aria-label="City to search" aria-describedby="saveBtn"></input>
             <div class="saveBtn col-1">
                 <i class="fas fa-search"></i>
             </div>
         </form>
     </div>
+    
+    <div class="card" id="currentCityWeather">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+    </div>
+
+    <div class="container" id="fiveDayForecast">
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
