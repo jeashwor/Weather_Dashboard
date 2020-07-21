@@ -32,6 +32,20 @@ function createCityButtons() {
     }
 };
 
+function assignUVColor (uvi) {
+    if (uvi < 3) {
+        document.getElementById("uvi").style.backgroundColor = "green";
+    } else if (uvi < 6 && uvi >= 3) {
+        document.getElementById("uvi").style.backgroundColor = "yellow";
+    } else if (uvi < 8 && uvi >= 6) {
+        document.getElementById("uvi").style.backgroundColor = "orange";
+    } else if (uvi < 11 && uvi >= 8) {
+        document.getElementById("uvi").style.backgroundColor = "red";
+    } else {
+        document.getElementById("uvi").style.backgroundColor = "magenta";
+    }
+};
+
 function submitWithCoord() {
     $.ajax({
         url: secondQueryUrl,
@@ -50,8 +64,9 @@ function submitWithCoord() {
         var uvEl = $("<div>");
         uvEl.addClass("card-text");
         uvEl.attr("id", "UV");
-        uvEl.html("UV Index: " + response.current.uvi);
+        uvEl.html("UV Index: <span id='uvi'>" + response.current.uvi + "</span>");
         $(".card-body").append(tempEl, humidityEL, windEl, uvEl);
+        assignUVColor(response.current.uvi);
     })
 };
 
@@ -114,4 +129,4 @@ $(document).on("click", function (event) {
 });
 
 
-// api.openweathermap.org/data/2.5/weather?q={city name}&appid={b2cb9091c77c412d1dede93b0ba6839c}
+
