@@ -20,16 +20,23 @@ if (storedCities !== null) {
     previousCitiesSearched = [];
 };
 
-function getDate () {
-    var milliseconds = (response.dt * 1000)
-}
+function createFiveCards() {
 
-function submitWithCoord () {
-    console.log(secondQueryUrl);
+};
+
+function createCityButtons() {
+    $(".prevCities").empty();
+    for (var i = 0; i < previousCitiesSearched.length; i++) {
+        var prevCityBtn = $("<button class='btn btn-outline-secondary cityButton' id='" + previousCitiesSearched[i] + "' type='button'>" + previousCitiesSearched[i] + "</button>");
+        $(".prevCities").append(prevCityBtn);
+    }
+};
+
+function submitWithCoord() {
     $.ajax({
         url: secondQueryUrl,
         method: "Get"
-    }).then (function (response) {
+    }).then(function (response) {
         console.log(response);
         var tempEl = $("<div>");
         tempEl.addClass("card-text");
@@ -45,14 +52,11 @@ function submitWithCoord () {
         uvEl.attr("id", "UV");
         uvEl.html("UV Index: " + response.current.uvi);
         $(".card-body").append(tempEl, humidityEL, windEl, uvEl);
-})
-}
+    })
+};
 
-function citySubmit() {
-    cityToSearch = citySearchEl.val();
-    $("#currentCityWeather").empty();
+function mainWeatherHeader() {
     var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityToSearch + "&appid=b2cb9091c77c412d1dede93b0ba6839c";
-    console.log(cityToSearch);
     $.ajax({
         url: queryUrl,
         method: "Get"
@@ -62,35 +66,52 @@ function citySubmit() {
         cityWeatherBody.addClass("card-body");
         var date = new Date(response.dt * 1000)
         date = date.toLocaleDateString();
-        console.log(date);
         var cityName = $("<h3>");
         cityName.addClass("card-title");
         cityName.html(cityToSearch + " (" + date + ") " + "<img src=http://openweathermap.org/img/w/" + response.weather[0].icon + ".png></img>");
         cityWeatherBody.append(cityName);
         $("#currentCityWeather").append(cityWeatherBody);
-
         var lat = response.coord.lat;
         var lon = response.coord.lon;
         secondQueryUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=b2cb9091c77c412d1dede93b0ba6839c"
         submitWithCoord();
-
-
     })
-}
+};
+
+function citySubmit() {
+    cityToSearch = citySearchEl.val();
+    previousCitiesSearched.push(cityToSearch);
+    localStorage.setItem("cities", JSON.stringify(previousCitiesSearched));
+    $("#currentCityWeather").empty();
+    createCityButtons();
+    mainWeatherHeader();
+};
 
 
 $(".saveBtn").on("click", function (event) {
     event.preventDefault();
     citySubmit();
-})
+});
 
 $(document).keypress(function (event) {
     if (event.keyCode == 13) {
         event.preventDefault();
         citySubmit();
     }
-})
+});
 
+$(document).on("click", function (event) {
+    console.log(event);
+    console.log(event.currentTarget.activeElement.classList[2]);
+    if (event.currentTarget.activeElement.classList[2] == "cityButton") {
+        event.preventDefault();
+        console.log(event.currentTarget.activeElement.id);
+        cityToSearch = event.currentTarget.activeElement.id;
+        console.log(cityToSearch);
+        $("#currentCityWeather").empty();
+        mainWeatherHeader();
+    }
+});
 
 
 // api.openweathermap.org/data/2.5/weather?q={city name}&appid={b2cb9091c77c412d1dede93b0ba6839c}
