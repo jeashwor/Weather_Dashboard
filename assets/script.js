@@ -60,8 +60,12 @@ function citySubmit() {
         console.log(response);
         var cityWeatherBody = $("<div>");
         cityWeatherBody.addClass("card-body");
+        var date = new Date(response.dt * 1000)
+        date = date.toLocaleDateString();
+        console.log(date);
         var cityName = $("<h3>");
-        cityName.addClass("card-title").text(cityToSearch);
+        cityName.addClass("card-title");
+        cityName.html(cityToSearch + " (" + date + ") " + "<img src=http://openweathermap.org/img/w/" + response.weather[0].icon + ".png></img>");
         cityWeatherBody.append(cityName);
         $("#currentCityWeather").append(cityWeatherBody);
 
