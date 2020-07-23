@@ -39,7 +39,7 @@ function createFiveCards(response) {
         cardDate.text(cardDateVal);
         var cardImg = $("<img>");
         cardImg.addClass("cardImg");
-        cardImg.attr("src", "http://openweathermap.org/img/w/" + response.daily[i].weather[0].icon + ".png");
+        cardImg.attr("src", "https://openweathermap.org/img/w/" + response.daily[i].weather[0].icon + ".png");
         var cardTemp = $("<div>");
         cardTemp.addClass("dayTemp");
         cardTemp.html("Temp: " + Math.floor(response.daily[i].temp.max) + " &#8457;");
@@ -104,7 +104,7 @@ function mainWeatherHeader() {
         date = date.toLocaleDateString();
         var cityName = $("<h3>");
         cityName.addClass("card-title");
-        cityName.html(cityToSearch + " (" + date + ") " + "<img src=http://openweathermap.org/img/w/" + response.weather[0].icon + ".png></img>");
+        cityName.html(cityToSearch + " (" + date + ") " + "<img src=https://openweathermap.org/img/w/" + response.weather[0].icon + ".png></img>");
         cityWeatherBody.append(cityName);
         $("#currentCityWeather").append(cityWeatherBody);
         // pull latitude and longitude info from city chosen to use in next ajax request
