@@ -16,6 +16,10 @@ var storedCities = JSON.parse(localStorage.getItem("cities"));
 // Check Storage and re-write current cities list if present. 
 if (storedCities !== null) {
     previousCitiesSearched = storedCities;
+    $("#currentCityWeather").empty();
+    cityToSearch = previousCitiesSearched[0];
+    createCityButtons();
+    mainWeatherHeader();
 } else {
     previousCitiesSearched = [];
 };
@@ -145,9 +149,9 @@ $(document).on("click", function (event) {
     console.log(event.currentTarget.activeElement.classList[2]);
     if (event.currentTarget.activeElement.classList[2] == "cityButton") {
         event.preventDefault();
-        console.log(event.currentTarget.activeElement.id);
         cityToSearch = event.currentTarget.activeElement.id;
-        console.log(cityToSearch);
+        previousCitiesSearched.unshift(cityToSearch);
+        localStorage.setItem("cities", JSON.stringify(previousCitiesSearched));
         $("#currentCityWeather").empty();
         mainWeatherHeader();
     }
