@@ -1,9 +1,11 @@
+/* header styling */
 header {
   text-align: center;
   padding: 20px;
   color: white;
 }
 
+/* Styling associated with City Search container and elements */
 i {
   margin-top: 10px;
 }
@@ -16,11 +18,23 @@ i {
   margin-bottom: 10px;
 }
 
+.prevCities {
+  margin-bottom: 10px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
 .clearBtn {
   background-color: rgb(29, 103, 240);
   margin-left: 10px;
   font-size: 11px;
   height: 38px;
+}
+
+.cityButton {
+  background-color: white;
 }
 
 .saveBtn i:hover {
@@ -32,31 +46,42 @@ i {
   margin-bottom: 10px;
 }
 
-.cityButton {
+#search {
+  float: left;
+  width: 400px;
+}
+
+#cityToSearch {
+  margin: 0px 0px 10px 15px;
+}
+
+/* Styling associated to weather area */
+#weather {
+  width: 60%;
+  margin-top: 15px;
+  float: right;
   background-color: white;
 }
 
-.prevCities {
-  margin-bottom: 10px;
+/* Current Weather  Styling */
+#uvi {
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
 }
 
+#currentCityWeather {
+  margin-bottom: 15px;
+}
+
+/* Five Day forecast styling */
 .forecastCard {
   background-color: rgb(29, 103, 240);
   color: white;
-  margin-left: 15px;
-  margin-bottom: 15px;
+  margin: 0px 0px 15px 15px;
   padding-bottom: 10px;
-  border-width: 1px;
+  border-width: 2px;
   border-radius: 5px;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-#fiveDayForecast { 
-  margin-left: 0px;
-  padding-left: 0px;
 }
 
 .fiveDay {
@@ -70,8 +95,7 @@ i {
 
 .cardImg {
   width: 60px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0px auto 0px auto;
 }
 
 .dayHum,
@@ -79,35 +103,10 @@ i {
   font-size: 11px;
 }
 
-#uvi {
-  padding: 5px;
-  border-radius: 5px;
+#fiveDayForecast { 
+  margin-left: 0px;
+  padding-left: 0px;
 }
 
-#cityToSearch {
-  margin-bottom: 10px;
-}
 
-#search {
-  float: left;
-  width: 400px;
-}
 
-#weather {
-  width: 60%;
-  margin-top: 15px;
-  float: right;
-  background-color: white;
-}
-
-#cityToSearch {
-  margin-left: 15px;
-}
-
-#uvi {
-  color: white;
-}
-
-#currentCityWeather {
-  margin-bottom: 15px;
-}
