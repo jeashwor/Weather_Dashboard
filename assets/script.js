@@ -7,9 +7,6 @@ var cityToSearch = "";
 var lat = 0;
 var lon = 0;
 
-
-var secondQueryUrl = ""
-
 // Get stored cities if they exist in local storage
 var storedCities = JSON.parse(localStorage.getItem("cities"));
 
@@ -24,6 +21,7 @@ if (storedCities !== null) {
     previousCitiesSearched = [];
 };
 
+// function to create 5 individual weather cards based on daily weather response
 function createFiveCards(response) {
     $("#fiveDayForecastHeader").empty();
     $("#fiveDayForecastElements").empty();
@@ -52,6 +50,7 @@ function createFiveCards(response) {
     };
 };
 
+// Creates buttons from previousCitiesSearched variable. 
 function createCityButtons() {
     $(".prevCities").empty();
     for (var i = 0; i < previousCitiesSearched.length; i++) {
@@ -60,6 +59,7 @@ function createCityButtons() {
     }
 };
 
+// function to check uv index value and apply background color to span according to given ranges
 function assignUVColor(uvi) {
     if (uvi < 3) {
         document.getElementById("uvi").style.backgroundColor = "green";
@@ -74,6 +74,7 @@ function assignUVColor(uvi) {
     }
 };
 
+// function to set city value to that of text input and then store that item in both global variable and add to local storage
 function citySubmit() {
     cityToSearch = citySearchEl.val();
     previousCitiesSearched.unshift(cityToSearch);
@@ -83,6 +84,7 @@ function citySubmit() {
     mainWeatherHeader();
 };
 
+// Function to submit chosen city to begin building current weather info to be displayed.
 function mainWeatherHeader() {
     var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityToSearch + "&appid=b2cb9091c77c412d1dede93b0ba6839c";
     $.ajax({
@@ -99,6 +101,7 @@ function mainWeatherHeader() {
         cityName.html(cityToSearch + " (" + date + ") " + "<img src=http://openweathermap.org/img/w/" + response.weather[0].icon + ".png></img>");
         cityWeatherBody.append(cityName);
         $("#currentCityWeather").append(cityWeatherBody);
+        // pull latitude and longitude info from city chosen to use in next ajax request
         var lat = response.coord.lat;
         var lon = response.coord.lon;
         secondQueryUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=b2cb9091c77c412d1dede93b0ba6839c"
@@ -106,12 +109,13 @@ function mainWeatherHeader() {
     })
 };
 
+// Function to submit ajax request with latitude and longitude coordinates of city chosen
 function submitWithCoord() {
     $.ajax({
         url: secondQueryUrl,
         method: "Get"
     }).then(function (response) {
-        console.log(response);
+        // Begin building remaining current day weather data
         var tempEl = $("<div>");
         tempEl.addClass("card-text");
         tempEl.html("Temperature: " + Math.floor(response.current.temp) + "&#8457;");
@@ -131,13 +135,13 @@ function submitWithCoord() {
     })
 };
 
-
-
+// Click Event added to save button on text field
 $(".saveBtn").on("click", function (event) {
     event.preventDefault();
     citySubmit();
 });
 
+// keypress event added to enter key within text input
 $(document).keypress(function (event) {
     if (event.keyCode == 13) {
         event.preventDefault();
@@ -145,6 +149,7 @@ $(document).keypress(function (event) {
     }
 });
 
+// Click event added to previously searched buttons
 $(document).on("click", function (event) {
     console.log(event.currentTarget.activeElement.classList[2]);
     if (event.currentTarget.activeElement.classList[2] == "cityButton") {
@@ -156,6 +161,3 @@ $(document).on("click", function (event) {
         mainWeatherHeader();
     }
 });
-
-
-
