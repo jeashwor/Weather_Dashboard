@@ -144,6 +144,7 @@ function submitWithCoord() {
 // Click Event added to save button on text field
 $(".saveBtn").on("click", function (event) {
     event.preventDefault();
+    $("#weather").removeClass("d-none");
     citySubmit();
 });
 
@@ -151,6 +152,7 @@ $(".saveBtn").on("click", function (event) {
 $(document).keypress(function (event) {
     if (event.keyCode == 13) {
         event.preventDefault();
+        $("#weather").removeClass("d-none");
         citySubmit();
     }
 });
