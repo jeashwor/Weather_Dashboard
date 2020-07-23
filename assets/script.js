@@ -26,14 +26,14 @@ function createFiveCards(response) {
     $("#fiveDayForecastHeader").empty();
     $("#fiveDayForecastElements").empty();
     var fiveDayForecastHeaderEl = $("<h3>");
-    fiveDayForecastHeaderEl.addClass("col-12 fiveDay");
+    fiveDayForecastHeaderEl.addClass("col-sm-12 fiveDay");
     fiveDayForecastHeaderEl.text("5-Day Forecast:");
     $("#fiveDayForecastHeader").append(fiveDayForecastHeaderEl);
     for (var i = 1; i <= 5; i++) {
         var forecastCard = $("<div>");
-        forecastCard.addClass("card col-2 forecastCard");
+        forecastCard.addClass("col-sm-2 forecastCard");
         var cardDate = $("<h3>");
-        cardDate.addClass("card-title dayHeader");
+        cardDate.addClass("dayHeader");
         var cardDateVal = new Date(response.daily[i].dt * 1000)
         cardDateVal = cardDateVal.toLocaleDateString();
         cardDate.text(cardDateVal);
@@ -41,10 +41,10 @@ function createFiveCards(response) {
         cardImg.addClass("cardImg");
         cardImg.attr("src", "http://openweathermap.org/img/w/" + response.daily[i].weather[0].icon + ".png");
         var cardTemp = $("<div>");
-        cardTemp.addClass("card-text dayTemp");
-        cardTemp.html("Temp: " + Math.floor(response.daily[i].temp.max) + "&#8457;");
+        cardTemp.addClass("dayTemp");
+        cardTemp.html("Temp: " + Math.floor(response.daily[i].temp.max) + " &#8457;");
         var cardHum = $("<div>");
-        cardHum.addClass("card-text dayHum");
+        cardHum.addClass("dayHum");
         cardHum.text("Humidity: " + response.daily[i].humidity + "%");
         forecastCard.append(cardDate, cardImg, cardTemp, cardHum);
         $("#fiveDayForecastElements").append(forecastCard);
@@ -55,7 +55,7 @@ function createFiveCards(response) {
 function createCityButtons() {
     $(".prevCities").empty();
     for (var i = 0; i < previousCitiesSearched.length; i++) {
-        var prevCityBtn = $("<button class='btn btn-outline-secondary cityButton' id='" + previousCitiesSearched[i] + "' type='button'>" + previousCitiesSearched[i] + "</button>");
+        var prevCityBtn = $("<button class='btn btn-outline-secondary cityButton pointer' id='" + previousCitiesSearched[i] + "' type='button'>" + previousCitiesSearched[i] + "</button>");
         $(".prevCities").append(prevCityBtn);
     }
 };
@@ -124,7 +124,7 @@ function submitWithCoord() {
         // Begin building remaining current day weather data
         var tempEl = $("<div>");
         tempEl.addClass("card-text");
-        tempEl.html("Temperature: " + Math.floor(response.current.temp) + "&#8457;");
+        tempEl.html("Temperature: " + Math.floor(response.current.temp) + " &#8457;");
         var humidityEL = $("<div>");
         humidityEL.addClass("card-text");
         humidityEL.html("Humidity: " + response.current.humidity + "%")
@@ -167,3 +167,11 @@ $(document).on("click", function (event) {
         mainWeatherHeader();
     }
 });
+
+// Added click event for clear cities button
+$(".clearBtn").on("click", function (event) {
+    event.preventDefault();
+    $(".prevCities").empty();
+    previousCitiesSearched = [];
+    localStorage.setItem("cities", JSON.stringify(previousCitiesSearched));
+})

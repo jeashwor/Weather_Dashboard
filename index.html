@@ -20,15 +20,18 @@
 
     <div class="container bg-light" id="search">
         <div class="row">
-            <h5 class="col">Search for a City:</h5>
+            <h5 class="col-sm">Search for a City:</h5>
         </div>
         <form class="row input-group">
-            <input type="text" class="col-6 form-control" id="cityToSearch" placeholder="City"
+            <input type="text" class="col-sm-6 form-control" id="cityToSearch" placeholder="City"
                 aria-label="City to search" aria-describedby="saveBtn"></input>
-            <div class="saveBtn col-1">
+            <button class="btn-primary saveBtn col-sm-2 pointer">
                 <i class="fas fa-search"></i>
-            </div>
-            <div class="col-12 btn-group-vertical prevCities">
+            </button>
+            <button class="btn-primary clearBtn col-sm-3 pointer">
+                Clear Cities
+            </button>
+            <div class="col-sm-12 btn-group-vertical prevCities">
 
             </div>
         </form>

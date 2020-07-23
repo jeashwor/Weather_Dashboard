@@ -9,11 +9,18 @@ i {
 }
 
 .saveBtn {
-  background-color: #457dd1;
+  background-color: rgb(29, 103, 240);
   color: white;
   padding: 0px;
   text-align: center;
   margin-bottom: 10px;
+}
+
+.clearBtn {
+  background-color: rgb(29, 103, 240);
+  margin-left: 10px;
+  font-size: 11px;
+  height: 38px;
 }
 
 .saveBtn i:hover {
@@ -32,6 +39,7 @@ i {
 .prevCities {
   margin-bottom: 10px;
 }
+
 .forecastCard {
   background-color: rgb(29, 103, 240);
   color: white;
@@ -42,10 +50,13 @@ i {
   border-radius: 5px;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 #fiveDayForecast { 
   margin-left: 0px;
   padding-left: 0px;
-
 }
 
 .fiveDay {
@@ -63,9 +74,11 @@ i {
   margin-right: auto;
 }
 
-.card-text {
-  font-size: 12px;
+.dayHum,
+.dayTemp {
+  font-size: 11px;
 }
+
 #uvi {
   padding: 5px;
   border-radius: 5px;
@@ -79,8 +92,10 @@ i {
   float: left;
   width: 400px;
 }
+
 #weather {
   width: 60%;
+  margin-top: 15px;
   float: right;
   background-color: white;
 }
