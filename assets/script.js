@@ -38,6 +38,7 @@ function createFiveCards(response) {
         cardDateVal = cardDateVal.toLocaleDateString();
         cardDate.text(cardDateVal);
         var cardImg = $("<img>");
+        cardImg.addClass("cardImg");
         cardImg.attr("src", "http://openweathermap.org/img/w/" + response.daily[i].weather[0].icon + ".png");
         var cardTemp = $("<div>");
         cardTemp.addClass("card-text dayTemp");
@@ -76,13 +77,17 @@ function assignUVColor(uvi) {
 
 // function to set city value to that of text input and then store that item in both global variable and add to local storage
 function citySubmit() {
-    cityToSearch = citySearchEl.val();
-    citySearchEl.val("");
-    previousCitiesSearched.unshift(cityToSearch);
-    localStorage.setItem("cities", JSON.stringify(previousCitiesSearched));
-    $("#currentCityWeather").empty();
-    createCityButtons();
-    mainWeatherHeader();
+    if (citySearchEl.val() == "") {
+        return;
+    } else {
+        cityToSearch = citySearchEl.val();
+        citySearchEl.val("");
+        previousCitiesSearched.unshift(cityToSearch);
+        localStorage.setItem("cities", JSON.stringify(previousCitiesSearched));
+        $("#currentCityWeather").empty();
+        createCityButtons();
+        mainWeatherHeader();
+    };
 };
 
 // Function to submit chosen city to begin building current weather info to be displayed.
