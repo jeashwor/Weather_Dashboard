@@ -77,6 +77,7 @@ function assignUVColor(uvi) {
 // function to set city value to that of text input and then store that item in both global variable and add to local storage
 function citySubmit() {
     cityToSearch = citySearchEl.val();
+    citySearchEl.val("");
     previousCitiesSearched.unshift(cityToSearch);
     localStorage.setItem("cities", JSON.stringify(previousCitiesSearched));
     $("#currentCityWeather").empty();
