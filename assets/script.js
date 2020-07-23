@@ -20,8 +20,32 @@ if (storedCities !== null) {
     previousCitiesSearched = [];
 };
 
-function createFiveCards() {
-
+function createFiveCards(response) {
+    $("#fiveDayForecastHeader").empty();
+    $("#fiveDayForecastElements").empty();
+    var fiveDayForecastHeaderEl = $("<div>");
+    fiveDayForecastHeaderEl.addClass("col-12 fiveDay");
+    fiveDayForecastHeaderEl.text("5-Day Forecast:");
+    $("#fiveDayForecastHeader").append(fiveDayForecastHeaderEl);
+    for (var i = 0; i < 5; i++) {
+        var forecastCard = $("<div>");
+        forecastCard.addClass("card forecastCard");
+        var cardDate = $("<h3>");
+        cardDate.addClass("card-title dayHeader");
+        var cardDateVal = new Date(response.daily[i].dt * 1000)
+        cardDateVal = cardDateVal.toLocaleDateString();
+        cardDate.text(cardDateVal);
+        var cardImg = $("<img>");
+        cardImg.attr("src", "http://openweathermap.org/img/w/" + response.daily[i].weather[0].icon + ".png");
+        var cardTemp = $("<div>");
+        cardTemp.addClass("card-text dayTemp");
+        cardTemp.html("Temp: " + Math.floor(response.daily[i].temp.max) + "&#8457;");
+        var cardHum = $("<div>");
+        cardHum.addClass("card-text dayHum");
+        cardHum.text("Humidity: " + response.daily[i].humidity + "%");
+        forecastCard.append(cardDate, cardImg, cardTemp, cardHum);
+        $("#fiveDayForecastElements").append(forecastCard);
+    };
 };
 
 function createCityButtons() {
@@ -32,7 +56,7 @@ function createCityButtons() {
     }
 };
 
-function assignUVColor (uvi) {
+function assignUVColor(uvi) {
     if (uvi < 3) {
         document.getElementById("uvi").style.backgroundColor = "green";
     } else if (uvi < 6 && uvi >= 3) {
@@ -46,28 +70,13 @@ function assignUVColor (uvi) {
     }
 };
 
-function submitWithCoord() {
-    $.ajax({
-        url: secondQueryUrl,
-        method: "Get"
-    }).then(function (response) {
-        console.log(response);
-        var tempEl = $("<div>");
-        tempEl.addClass("card-text");
-        tempEl.html("Temperature: " + Math.floor(response.current.temp) + "&#8457;");
-        var humidityEL = $("<div>");
-        humidityEL.addClass("card-text");
-        humidityEL.html("Humidity: " + response.current.humidity + "%")
-        var windEl = $("<div>");
-        windEl.addClass("card-text");
-        windEl.html("Wind Speed: " + response.current.wind_speed.toFixed(1) + " MPH")
-        var uvEl = $("<div>");
-        uvEl.addClass("card-text");
-        uvEl.attr("id", "UV");
-        uvEl.html("UV Index: <span id='uvi'>" + response.current.uvi + "</span>");
-        $(".card-body").append(tempEl, humidityEL, windEl, uvEl);
-        assignUVColor(response.current.uvi);
-    })
+function citySubmit() {
+    cityToSearch = citySearchEl.val();
+    previousCitiesSearched.unshift(cityToSearch);
+    localStorage.setItem("cities", JSON.stringify(previousCitiesSearched));
+    $("#currentCityWeather").empty();
+    createCityButtons();
+    mainWeatherHeader();
 };
 
 function mainWeatherHeader() {
@@ -93,14 +102,31 @@ function mainWeatherHeader() {
     })
 };
 
-function citySubmit() {
-    cityToSearch = citySearchEl.val();
-    previousCitiesSearched.push(cityToSearch);
-    localStorage.setItem("cities", JSON.stringify(previousCitiesSearched));
-    $("#currentCityWeather").empty();
-    createCityButtons();
-    mainWeatherHeader();
+function submitWithCoord() {
+    $.ajax({
+        url: secondQueryUrl,
+        method: "Get"
+    }).then(function (response) {
+        console.log(response);
+        var tempEl = $("<div>");
+        tempEl.addClass("card-text");
+        tempEl.html("Temperature: " + Math.floor(response.current.temp) + "&#8457;");
+        var humidityEL = $("<div>");
+        humidityEL.addClass("card-text");
+        humidityEL.html("Humidity: " + response.current.humidity + "%")
+        var windEl = $("<div>");
+        windEl.addClass("card-text");
+        windEl.html("Wind Speed: " + response.current.wind_speed.toFixed(1) + " MPH")
+        var uvEl = $("<div>");
+        uvEl.addClass("card-text");
+        uvEl.attr("id", "UV");
+        uvEl.html("UV Index: <span id='uvi'>" + response.current.uvi + "</span>");
+        $(".card-body").append(tempEl, humidityEL, windEl, uvEl);
+        assignUVColor(response.current.uvi);
+        createFiveCards(response);
+    })
 };
+
 
 
 $(".saveBtn").on("click", function (event) {
@@ -116,7 +142,6 @@ $(document).keypress(function (event) {
 });
 
 $(document).on("click", function (event) {
-    console.log(event);
     console.log(event.currentTarget.activeElement.classList[2]);
     if (event.currentTarget.activeElement.classList[2] == "cityButton") {
         event.preventDefault();
