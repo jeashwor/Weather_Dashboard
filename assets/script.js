@@ -25,13 +25,13 @@ if (storedCities !== null) {
 function createFiveCards(response) {
     $("#fiveDayForecastHeader").empty();
     $("#fiveDayForecastElements").empty();
-    var fiveDayForecastHeaderEl = $("<div>");
+    var fiveDayForecastHeaderEl = $("<h3>");
     fiveDayForecastHeaderEl.addClass("col-12 fiveDay");
     fiveDayForecastHeaderEl.text("5-Day Forecast:");
     $("#fiveDayForecastHeader").append(fiveDayForecastHeaderEl);
-    for (var i = 0; i < 5; i++) {
+    for (var i = 1; i <= 5; i++) {
         var forecastCard = $("<div>");
-        forecastCard.addClass("card forecastCard");
+        forecastCard.addClass("card col-2 forecastCard");
         var cardDate = $("<h3>");
         cardDate.addClass("card-title dayHeader");
         var cardDateVal = new Date(response.daily[i].dt * 1000)

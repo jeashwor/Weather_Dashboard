@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <link rel="stylesheet" href="./assets/style.css">
     <title>Weather Dashboard</title>
@@ -23,32 +23,32 @@
             <h5 class="col">Search for a City:</h5>
         </div>
         <form class="row input-group">
-            <input type="text" class="col-6 form-control" id="cityToSearch" placeholder="City" aria-label="City to search" aria-describedby="saveBtn"></input>
+            <input type="text" class="col-6 form-control" id="cityToSearch" placeholder="City"
+                aria-label="City to search" aria-describedby="saveBtn"></input>
             <div class="saveBtn col-1">
                 <i class="fas fa-search"></i>
             </div>
             <div class="col-12 btn-group-vertical prevCities">
-    
+
             </div>
         </form>
-        
-        
+
+
+    </div>
+    <div id="weather">
+        <div class="card" id="currentCityWeather">
+
+        </div>
+        <div class="container" id="fiveDayForecast">
+            <div class="row" id="fiveDayForecastHeader">
+
+            </div>
+            <div class="row" id="fiveDayForecastElements">
+
+            </div>
+        </div>
     </div>
     
-    <div class="card" id="currentCityWeather">
-
-    </div>
-
-    <div class="container" id="fiveDayForecast">
-        <div class="row" id="fiveDayForecastHeader">
-
-        </div>
-        <div class="row" id="fiveDayForecastElements">
-            
-        </div>
-
-    </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"

@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(148, 239, 255);
+}
+
 header {
   text-align: center;
   padding: 20px;
@@ -6,14 +10,13 @@ header {
 
 i {
   margin-top: 10px;
-  }
+}
 
 .saveBtn {
   background-color: #457dd1;
   color: white;
   padding: 0px;
   text-align: center;
-
 }
 
 .saveBtn i:hover {
@@ -21,13 +24,44 @@ i {
   transition: all 0.3s ease-in-out;
 }
 
+.card-text {
+  margin-bottom: 10px;
+}
+
+.cityButton {
+  background-color: white;
+}
+
+.forecastCard {
+  background-color: rgb(29, 103, 240);
+  margin-left: 15px;
+}
+
+.fiveDayForecast {
+  border-radius: 5px;
+  border-width: 2px;
+}
+
+.dayHeader {
+  font-size: 20px;
+}
+
+#uvi {
+  padding: 5px;
+  border-radius: 5px;
+}
+
 #search {
   float: left;
   width: 400px;
 }
+#weather {
+  float: right;
+  background-color: white;
+}
 
 #cityToSearch {
-    margin-left: 15px;
+  margin-left: 15px;
 }
 
 #uvi {
