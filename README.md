@@ -1,5 +1,9 @@
 # Weather_Dashboard
 
+Link: https://jeashwor.github.io/Weather_Dashboard/
+
+Github Repo: https://github.com/jeashwor/Weather_Dashboard
+
 ![screen shot](./assets/screenShot.png)
 
 ## User Story
